@@ -4,16 +4,14 @@ interface OperationOutput {
 }
 
 export const formatString = (string: string) => {
-  let globalClipboard = "";
-
-  const { output } = applyCommands(string, globalClipboard);
+  const { output } = applyCommands(string);
 
   return output;
 };
 
 const applyCommands = (
   string: string,
-  globalClipboard: string
+  clipboard: string = ""
 ): OperationOutput => {
   let newClipboard = "";
   let newOutput = "";
@@ -40,7 +38,7 @@ const applyCommands = (
   }
 
   if (command === "[CTRL+V]") {
-    const { output } = paste(string, globalClipboard);
+    const { output } = paste(string, clipboard);
     newOutput = output;
   }
 
@@ -77,6 +75,6 @@ const paste = (string: string, clipboard: string): OperationOutput => {
 };
 
 const result = formatString(
-  "the shimmering star[CTRL+X]Twinkling in the dark, [CTRL+V] shines bright."
+  "the big red[CTRL+C] fox jumps over [CTRL+V] lazy dog."
 );
-console.log("RES", result);
+console.log(result);
