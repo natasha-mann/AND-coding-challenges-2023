@@ -1,7 +1,7 @@
 import { formatString } from ".";
 
 describe("Copy Paste functionality", () => {
-  describe("Given a string with one [ctrl+C] command and a following [ctrl+V] command", () => {
+  describe("Given a string with a single [ctrl+C] command and a following [ctrl+V] command", () => {
     it.each([
       {
         input: "the big red[CTRL+C] fox jumps over [CTRL+V] lazy dog.",
@@ -14,7 +14,7 @@ describe("Copy Paste functionality", () => {
           "a majestic lion searches for a majestic lion in the tall grass.",
       },
     ])("$input -> $expectedOutput", ({ input, expectedOutput }) => {
-      const { output } = formatString(input);
+      const output = formatString(input);
 
       expect(output).toBe(expectedOutput);
     });
@@ -26,7 +26,7 @@ describe("Copy Paste functionality", () => {
     const expectedOutput =
       "the sun shines down on the sun shines down the busy the sun shines down on the sun shines down.";
 
-    const { output } = formatString(input);
+    const output = formatString(input);
 
     expect(output).toBe(expectedOutput);
   });
@@ -37,7 +37,7 @@ describe("Copy Paste functionality", () => {
     const expectedOutput =
       "the tall oak tree towers over the lush green meadow.";
 
-    const { output } = formatString(input);
+    const output = formatString(input);
 
     expect(output).toBe(expectedOutput);
   });
@@ -48,7 +48,7 @@ describe("Copy Paste functionality", () => {
     const expectedOutput =
       "Twinkling in the dark, the shimmering star shines bright.";
 
-    const { output } = formatString(input);
+    const output = formatString(input);
 
     expect(output).toBe(expectedOutput);
   });

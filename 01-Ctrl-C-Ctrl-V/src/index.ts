@@ -6,7 +6,7 @@ interface OperationOutput {
 export const formatString = (
   string: string,
   clipboard: string = ""
-): OperationOutput => {
+): string => {
   let newClipboard = "";
   let newOutput = "";
 
@@ -14,7 +14,7 @@ export const formatString = (
   const commandEnd = string.indexOf("]");
 
   if (commandStart === -1) {
-    return { output: string, clipboard: newClipboard };
+    return string;
   }
 
   const command = string.slice(commandStart, commandEnd + 1);
@@ -32,7 +32,7 @@ export const formatString = (
   }
 
   if (command === "[CTRL+V]") {
-    const { output } = paste(string, clipboard);
+    const output = paste(string, clipboard);
     newOutput = output;
   }
 
@@ -59,16 +59,11 @@ const cut = (string: string): OperationOutput => {
   };
 };
 
-const paste = (string: string, clipboard: string): OperationOutput => {
-  const output = string.replace("[CTRL+V]", clipboard);
-
-  return {
-    output,
-    clipboard,
-  };
+const paste = (string: string, clipboard: string): string => {
+  return string.replace("[CTRL+V]", clipboard);
 };
 
-const { output } = formatString(
+const output = formatString(
   "the big red[CTRL+C] fox jumps over [CTRL+V] lazy dog."
 );
 
