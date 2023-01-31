@@ -4,12 +4,12 @@ interface OperationOutput {
 }
 
 export const formatString = (string: string) => {
-  const { output } = applyCommands(string);
+  const { output } = executeCommands(string);
 
   return output;
 };
 
-const applyCommands = (
+const executeCommands = (
   string: string,
   clipboard: string = ""
 ): OperationOutput => {
@@ -42,7 +42,7 @@ const applyCommands = (
     newOutput = output;
   }
 
-  return applyCommands(newOutput, newClipboard);
+  return executeCommands(newOutput, newClipboard);
 };
 
 const copy = (string: string): OperationOutput => {
