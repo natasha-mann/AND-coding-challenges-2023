@@ -2,6 +2,16 @@
 
 Welcome back! Here's a fun little string manipulation challenge to kick things off. The challenge is to analyse these strings for any instances of `[CTRL+C]` and `[CTRL+V]`. When `[CTRL+C]` is encountered, the contents of the string before it should be 'copied' to a clipboard. Upon any instance of `[CTRL+V]` in the string, this clipboard should be pasted in its place. If `[CTRL+V]` is encountered before any corresponding `[CTRL+C]` then it should simply paste nothing.
 
+## Getting Started
+
+To run the algorithm, edit the string passed to the `formatString` function in the `index.ts` file and run `npm run start`
+
+## Tests
+
+```
+npm run test
+```
+
 ## Rewards:
 
 5️⃣ Points are awarded for a working algorithm as described above
