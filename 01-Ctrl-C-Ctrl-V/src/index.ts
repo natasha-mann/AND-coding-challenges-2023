@@ -3,13 +3,7 @@ interface OperationOutput {
   clipboard: string;
 }
 
-export const formatString = (string: string) => {
-  const { output } = executeCommands(string);
-
-  return output;
-};
-
-const executeCommands = (
+export const formatString = (
   string: string,
   clipboard: string = ""
 ): OperationOutput => {
@@ -42,7 +36,7 @@ const executeCommands = (
     newOutput = output;
   }
 
-  return executeCommands(newOutput, newClipboard);
+  return formatString(newOutput, newClipboard);
 };
 
 const copy = (string: string): OperationOutput => {
@@ -74,7 +68,8 @@ const paste = (string: string, clipboard: string): OperationOutput => {
   };
 };
 
-const result = formatString(
+const { output } = formatString(
   "the big red[CTRL+C] fox jumps over [CTRL+V] lazy dog."
 );
-console.log(result);
+
+console.log(output);
