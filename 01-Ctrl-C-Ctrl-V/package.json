@@ -1,0 +1,21 @@
+{
+  "name": "01-ctrl-c-ctrl-v",
+  "version": "1.0.0",
+  "description": "Welcome back! Here's a fun little string manipulation challenge to kick things off. The challenge is to analyse these strings for any instances of `[CTRL+C]` and `[CTRL+V]`. When `[CTRL+C]` is encountered, the contents of the string before it should be 'copied' to a clipboard. Upon any instance of `[CTRL+V]` in the string, this clipboard should be pasted in its place. If `[CTRL+V]` is encountered before any corresponding `[CTRL+C]` then it should simply paste nothing.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.18",
+    "jest": "^29.4.1",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
