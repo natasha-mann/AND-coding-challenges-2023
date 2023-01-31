@@ -3,45 +3,42 @@ interface OperationOutput {
   clipboard: string;
 }
 
-export const formatString = (
-  string: string,
-  clipboard: string = ""
-): string => {
+export const formatString = (input: string, clipboard: string = ""): string => {
   let newClipboard = "";
   let newOutput = "";
 
-  const commandStart = string.indexOf("[");
-  const commandEnd = string.indexOf("]");
+  const commandStart = input.indexOf("[");
+  const commandEnd = input.indexOf("]");
 
   if (commandStart === -1) {
-    return string;
+    return input;
   }
 
-  const command = string.slice(commandStart, commandEnd + 1);
+  const command = input.slice(commandStart, commandEnd + 1);
 
   if (command === "[CTRL+C]") {
-    const { output, clipboard } = copy(string);
+    const { output, clipboard } = copy(input);
     newClipboard = clipboard;
     newOutput = output;
   }
 
   if (command === "[CTRL+X]") {
-    const { output, clipboard } = cut(string);
+    const { output, clipboard } = cut(input);
     newClipboard = clipboard;
     newOutput = output;
   }
 
   if (command === "[CTRL+V]") {
-    const output = paste(string, clipboard);
+    const output = paste(input, clipboard);
     newOutput = output;
   }
 
   return formatString(newOutput, newClipboard);
 };
 
-const copy = (string: string): OperationOutput => {
-  const output = string.replace("[CTRL+C]", "");
-  const clipboard = string.slice(0, string.indexOf("[CTRL+C]"));
+const copy = (input: string): OperationOutput => {
+  const output = input.replace("[CTRL+C]", "");
+  const clipboard = input.slice(0, input.indexOf("[CTRL+C]"));
 
   return {
     output,
@@ -49,9 +46,9 @@ const copy = (string: string): OperationOutput => {
   };
 };
 
-const cut = (string: string): OperationOutput => {
-  const clipboard = string.slice(0, string.indexOf("[CTRL+X]"));
-  const output = string.slice(string.indexOf("[CTRL+X]") + "[CTRL+X]".length);
+const cut = (input: string): OperationOutput => {
+  const clipboard = input.slice(0, input.indexOf("[CTRL+X]"));
+  const output = input.slice(input.indexOf("[CTRL+X]") + "[CTRL+X]".length);
 
   return {
     output,
@@ -59,8 +56,8 @@ const cut = (string: string): OperationOutput => {
   };
 };
 
-const paste = (string: string, clipboard: string): string => {
-  return string.replace("[CTRL+V]", clipboard);
+const paste = (input: string, clipboard: string): string => {
+  return input.replace("[CTRL+V]", clipboard);
 };
 
 const output = formatString(
