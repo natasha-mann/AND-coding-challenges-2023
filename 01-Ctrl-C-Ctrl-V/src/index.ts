@@ -1,20 +1,15 @@
-interface OperationOutput {
-  output: string;
-  clipboard: string;
-}
-
 export const formatString = (input: string, clipboard: string = ""): string => {
   let newClipboard = "";
   let newOutput = "";
 
-  const commandStart = input.indexOf("[");
-  const commandEnd = input.indexOf("]");
+  const indexCommandStart = input.indexOf("[");
+  const indexCommandEnd = input.indexOf("]");
 
-  if (commandStart === -1) {
+  if (!indexCommandStart) {
     return input;
   }
 
-  const command = input.slice(commandStart, commandEnd + 1);
+  const command = input.slice(indexCommandStart, indexCommandEnd + 1);
 
   if (command === "[CTRL+C]") {
     const { output, clipboard } = copy(input);
@@ -36,7 +31,7 @@ export const formatString = (input: string, clipboard: string = ""): string => {
   return formatString(newOutput, newClipboard);
 };
 
-const copy = (input: string): OperationOutput => {
+const copy = (input: string): { output: string; clipboard: string } => {
   const output = input.replace("[CTRL+C]", "");
   const clipboard = input.slice(0, input.indexOf("[CTRL+C]"));
 
@@ -46,7 +41,7 @@ const copy = (input: string): OperationOutput => {
   };
 };
 
-const cut = (input: string): OperationOutput => {
+const cut = (input: string): { output: string; clipboard: string } => {
   const clipboard = input.slice(0, input.indexOf("[CTRL+X]"));
   const output = input.slice(input.indexOf("[CTRL+X]") + "[CTRL+X]".length);
 
