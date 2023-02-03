@@ -5,7 +5,7 @@ export const formatString = (input: string, clipboard: string = ""): string => {
   const indexCommandStart = input.indexOf("[");
   const indexCommandEnd = input.indexOf("]");
 
-  if (!indexCommandStart) {
+  if (indexCommandStart === -1) {
     return input;
   }
 
